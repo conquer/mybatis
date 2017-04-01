@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.dao.UserDao">
+
+    <resultMap id="userMapper" type="com.mybatis.data.User">
+        <result column="card_id" property="cardId"/>
+        <result column="skill_id" property="skillId"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="map">
+        INSERT INTO user(username, password, card_id, gender, education, address) VALUES
+        (#{username}, #{password}, #{cardId}, #{gender}, #{education}, #{address})
+    </insert>
+
+    <select id="getUserByName" parameterType="string" resultMap="userMapper">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+
+    <update id="updateUser" parameterType="map">
+        UPDATE user
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="cardId != null">
+                username = #{username},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="education != null">
+                education = #{education},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+        </set>
+        WHERE card_id = #{cardId}
+    </update>
+</mapper>
