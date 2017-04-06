@@ -21,12 +21,14 @@ public class User {
 
     private int skillId;
 
+    private int status;
+
     public User() {
 
     }
 
     public User(long id, String username, String password, String cardId, String gender, String education,
-                String address, int skillId) {
+                String address, int skillId, int status) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -35,6 +37,7 @@ public class User {
         this.education = education;
         this.address = address;
         this.skillId = skillId;
+        this.status = status;
     }
 
     public long getId() {
@@ -99,5 +102,13 @@ public class User {
 
     public void setSkillId(int skillId) {
         this.skillId = skillId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -29,6 +29,7 @@ CREATE TABLE `user` (
   `gender` varchar(20) NOT NULL,
   `education` varchar(20) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `card_id` (`card_id`),
   KEY `username` (`username`) USING BTREE

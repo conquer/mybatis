@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableTransactionManagement
-@ImportResource({"file:config/db_config.xml"})
+@ImportResource({"file:config/db_config_spring.xml"})
 public class Application {
 
     public static void main(String[] args) throws Exception {
