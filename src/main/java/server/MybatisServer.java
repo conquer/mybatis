@@ -1,8 +1,9 @@
 package server;
 
 import com.google.common.util.concurrent.AbstractIdleService;
-import com.mybatis.dao.UserDao;
-import com.mybatis.data.User;
+import com.mybatis.data.generator.User;
+import com.mybatis.data.generator.UserExample;
+import com.mybatis.data.generator.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,24 +29,25 @@ public class MybatisServer extends AbstractIdleService {
         createSqlSessionFactory();
         List<User> userList = getUserList("xionggp");
         if (userList != null  && !userList.isEmpty()) {
-            LOG.info("Success get user!");
+            LOG.info("Success get events!");
         } else {
-            LOG.info("Fail get user!");
+            LOG.info("Fail get events!");
         }
     }
 
     private List<User> getUserList(String username) {
         try {
             SqlSession sqlSession = sqlSessionFactory.openSession();
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
-            return userDao.getUserByName(username);
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andUsernameEqualTo(username);
+            return userMapper.selectByExample(userExample);
         } catch (Exception e) {
             LOG.error("getUserList", e);
         }
 
         return null;
     }
-
 
     private synchronized void createSqlSessionFactory() throws Exception {
         // create an SqlSessionFactory

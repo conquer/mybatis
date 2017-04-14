@@ -1,20 +1,17 @@
 package com.mybatis.dao;
 
-import com.alibaba.fastjson.JSONObject;
-import com.mybatis.data.User;
-import org.springframework.stereotype.Repository;
+import com.mybatis.data.generator.User;
 
 import java.util.List;
 
 /**
- * Created by xionggp on 17/3/31.
+ * Created by xionggp on 17/4/14.
  */
-@Repository
-public interface UserDao extends BaseSimpleDao {
-
-    void addUser(JSONObject user);
-
-    void updateUser(JSONObject user);
+public interface UserDao {
 
     List<User> getUserByName(String username);
+
+    boolean insert(User user);
+
+    boolean updateUser(User user);
 }

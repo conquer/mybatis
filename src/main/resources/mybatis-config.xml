@@ -28,7 +28,7 @@
         并且默认设置一个别名，默认的名字为： javabean 的首字母小写的非限定类名来作为它的别名。
         也可在javabean 加上注解@Alias 来自定义别名， 例如： @Alias(user)
         <package name="com.mybatis.data"/>-->
-        <typeAlias alias="UserEntity" type="com.mybatis.data.User"/>
+        <typeAlias alias="User" type="com.mybatis.data.generator.User"/>
     </typeAliases>
 
     <typeHandlers>
@@ -83,7 +83,7 @@
 
     <mappers>
         <!-- 第一种方式：通过resource指定 -->
-        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="generatorMapper/UserMapper.xml"/>
         <!-- 第二种方式， 通过class指定接口，进而将接口与对应的xml文件形成映射关系
              不过，使用这种方式必须保证 接口与mapper文件同名(不区分大小写)，
              我这儿接口是UserDao,那么意味着mapper文件为UserDao.xml

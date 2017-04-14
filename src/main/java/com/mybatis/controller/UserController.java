@@ -1,7 +1,7 @@
 package com.mybatis.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mybatis.data.User;
+import com.mybatis.data.generator.User;
 import com.mybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

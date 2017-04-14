@@ -2,9 +2,8 @@ package com.mybatis.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mybatis.dao.UserDao;
-import com.mybatis.data.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.mybatis.dao.impl.UserDaoImpl;
+import com.mybatis.data.generator.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,24 +15,15 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-
     private UserDao userDao;
 
     @Autowired
-    public UserService(UserDao userDao) {
+    public UserService(UserDaoImpl userDao) {
         this.userDao = userDao;
     }
 
     public boolean addUser(JSONObject user) {
-        try {
-            userDao.addUser(user);
-            return true;
-        } catch (Exception e) {
-            LOG.error("addUser", e);
-        }
-
-        return false;
+        return userDao.insert(getUser(user));
     }
 
     public List<User> getUsers(String username) {
@@ -41,14 +31,18 @@ public class UserService {
     }
 
     public boolean updateUser(JSONObject user) {
-        try {
-            userDao.updateUser(user);
-            return true;
-        } catch (Exception e) {
-            LOG.error("updateUser", e);
-        }
+        return userDao.updateUser(getUser(user));
+    }
 
-        return false;
+    public User getUser(JSONObject data) {
+        User user = new User();
+        user.setUsername(data.getString("username"));
+        user.setPassword(data.getString("password"));
+        user.setAddress(data.getString("address"));
+        user.setCardId(data.getString("cardId"));
+        user.setEducation(data.getString("education"));
+        user.setGender(data.getString("gender"));
+        return user;
     }
 
 }

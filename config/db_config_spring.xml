@@ -18,7 +18,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref = "dataSource" />
         <property name="configLocation" value="classpath:/mybatis-spring-config.xml" />
-        <property name="mapperLocations" value="classpath*:/mapper/*.xml" />
+        <property name="mapperLocations" value="classpath*:/generatorMapper/*.xml" />
         <property name="failFast" value="true" />
     </bean>
 
@@ -29,9 +29,8 @@
 
     <!--marketInterface: 基于接口的过滤器，实现了该接口的dao才会被扫描器扫描-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.mybatis.dao"/>
+        <property name="basePackage" value="com.mybatis.data.generator.mapper"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplateSimple" />
-        <property name="markerInterface" value="com.mybatis.dao.BaseSimpleDao" />
     </bean>
 
     <!--<bean id="sqlSessionTemplateBatch" class="org.mybatis.spring.SqlSessionTemplate">-->
